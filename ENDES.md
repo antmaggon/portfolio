@@ -1,5 +1,6 @@
 ---
 title: 7. ENTORNOS DE DESARROLLO
+layout: home
 ---
 ## ENTORNOS DE DESARROLLO
 
