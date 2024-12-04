@@ -1,5 +1,6 @@
 ---
 title: 5. ITINERARIO PERSONAL
+layout: home
 ---
 
 ## ITINERARIO PERSONAL
