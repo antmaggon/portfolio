@@ -9,24 +9,24 @@ aux_links:
 
 # _config.yml
 nav:
-  - title: "1. Home"
+  - title: "1.Home"
     path: index.md
     
-  - title: "2. PROGRAMACION"
+  - title: "2.PROGRAMACION"
     path: PROGRAMACION.md
     
-  - title: "3. BASES DE DATOS"
+  - title: "3.BASES DE DATOS"
     path: BDA.md
     
-  - title: "4. ENTORNOS DE DESARROLLO"
+  - title: "4.ENTORNOS DE DESARROLLO"
     path: ENDES.md
     
-  - title: "5. INGLES"
+  - title: "5.INGLES"
     path: ENG.md
     
-  - title: "6. ITINERARIO PERSONAL"
+  - title: "6.ITINERARIO PERSONAL"
     path: ITIPERSONAL.md
    
-  - title: "7. SISTEMAS INFORMATICOS"
+  - title: "7.SISTEMAS INFORMATICOS"
     path: SISINF.md 
     
