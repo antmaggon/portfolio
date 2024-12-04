@@ -1,5 +1,5 @@
 ---
-title:2. PROGRAMACION
+title: 2. PROGRAMACION
 ---
 
 ## Programacion
