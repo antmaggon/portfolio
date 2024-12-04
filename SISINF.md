@@ -1,5 +1,6 @@
 ---
 title: 6. SISTEMAS INFORMATICOS
+layout: home
 ---
 
 ## SISTEMAS INFORMATICOS
