@@ -7,8 +7,9 @@ url: https://just-the-docs.github.io
 aux_links:
   Template Repository: https://github.com/just-the-docs/just-the-docs-template
 
+# _config.yml
 nav:
-  - title: Asignatura 1
-    url: /asignatura1/
-  - title: Asignatura 2
-    url: /asignatura2/
+  - title: "Inicio"
+    path: index.html
+  - title: "Tema 0"
+    path: tema0.html
