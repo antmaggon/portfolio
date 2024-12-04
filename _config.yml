@@ -14,13 +14,19 @@ nav:
     weight: 1
   - title: "PROGRAMACION"
     path: PROGRAMACION.md
+    weight: 2
   - title: "BASES DE DATOS"
     path: BDA.md
+    weight: 3
   - title: "ENTORNOS DE DESARROLLO"
     path: ENDES.md
+    weight: 4
   - title: "INGLES"
     path: ENG.md
+    weight: 5
   - title: "ITINERARIO PERSONAL"
     path: ITIPERSONAL.md
+    weight: 6
   - title: "SISTEMAS INFORMATICOS"
     path: SISINF.md 
+    weight: 7
