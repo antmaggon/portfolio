@@ -3,7 +3,7 @@ title: 2. PROGRAMACION
 layout: home
 ---
 
-## Programacion
+## PROGRAMACION
 
 En este tema vamos a estudiar...
 
