@@ -9,7 +9,7 @@ aux_links:
 
 # _config.yml
 nav:
-  - title: "Inicio"
+  - title: "Home"
     path: index.md
     weight: 1
   - title: "PROGRAMACION"
