@@ -1,6 +1,11 @@
 ---
 title: Tema 1
-layout: deafult
-nav_order: 1
-parent: home
 ---
+
+## Introducción al Tema 1
+
+En este tema vamos a estudiar...
+
+* ...
+* ...
+* ...
