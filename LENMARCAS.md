@@ -1,5 +1,6 @@
 ---
 title: 3. LENGUAJE DE MARCAS
+layout: home
 ---
 
 ## LENGUAJE DE MARCAS
