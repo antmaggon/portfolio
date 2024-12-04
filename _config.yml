@@ -10,6 +10,6 @@ aux_links:
 # _config.yml
 nav:
   - title: "Inicio"
-    path: index.html
+    path: index.md
   - title: "Tema 0"
-    path: tema0.html
+    path: tema0.md
