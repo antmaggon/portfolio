@@ -11,22 +11,22 @@ aux_links:
 nav:
   - title: "1. Home"
     path: index.md
-    nav_order: 1
+    
   - title: "2. PROGRAMACION"
     path: PROGRAMACION.md
-    nav_order: 2
+    
   - title: "3. BASES DE DATOS"
     path: BDA.md
-    nav_order: 3
+    
   - title: "4. ENTORNOS DE DESARROLLO"
     path: ENDES.md
-    nav_order: 4
+    
   - title: "5. INGLES"
     path: ENG.md
-    nav_order: 5
+    
   - title: "6. ITINERARIO PERSONAL"
     path: ITIPERSONAL.md
-    nav_order: 6
+   
   - title: "7. SISTEMAS INFORMATICOS"
     path: SISINF.md 
-    nav_order: 7
+    
