@@ -1,5 +1,6 @@
 ---
 title: 4. BASES DE DATOS
+layout: home
 ---
 ## BASE DE DATOS
 
