@@ -1,5 +1,5 @@
 ---
-title: LENMARCAS
+title: LENGUAJE DE MARCAS
 ---
 
 ## LENGUAJE DE MARCAS
