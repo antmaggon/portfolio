@@ -13,3 +13,13 @@ nav:
     path: index.md
   - title: "PROGRAMACION"
     path: PROGRAMACION.md
+  - title: "BDA"
+    path: BDA.md
+  - title: "ENDES"
+    path: ENDES.md
+  - title: "ENG"
+    path: ENG.md
+  - title: "ITIPERSONAL"
+    path: ITIPERSONAL.md
+  - title: "SISINF"
+    path: SISINF.md 
