@@ -11,6 +11,7 @@ aux_links:
 nav:
   - title: "Inicio"
     path: index.md
+    weight: 1
   - title: "PROGRAMACION"
     path: PROGRAMACION.md
   - title: "BASES DE DATOS"
