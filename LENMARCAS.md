@@ -1,6 +1,6 @@
 ---
 title: 3. LENGUAJE DE MARCAS
-layout: default
+layout: home
 ---
 
 ## LENGUAJE DE MARCAS
