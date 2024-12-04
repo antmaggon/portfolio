@@ -2,7 +2,7 @@
 title: Tema 1
 ---
 
-## Introducción al Tema 1
+## Programacion
 
 En este tema vamos a estudiar...
 
