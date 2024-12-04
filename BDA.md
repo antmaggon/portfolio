@@ -1,5 +1,5 @@
 ---
-title: BDA
+title: BASES DE DATOS
 ---
 ## BASE DE DATOS
 
