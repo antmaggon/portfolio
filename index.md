@@ -15,7 +15,7 @@ Bienvenido a mi página de asignaturas.
 
 <!-- Contenedor de la izquierda con las asignaturas -->
 <div style="width: 25%; padding: 10px; border-right: 2px solid #ccc;">
-    ###PROGRAMACION
+    ### PROGRAMACION
     Aquí va la descripción de la asignatura 1.
 
     ### BASE DE DATOS
