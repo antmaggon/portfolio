@@ -11,5 +11,5 @@ aux_links:
 nav:
   - title: "Inicio"
     path: index.md
-  - title: "Tema 0"
-    path: tema0.md
+  - title: "PROGRAMACION"
+    path: PROGRAMACION.md
