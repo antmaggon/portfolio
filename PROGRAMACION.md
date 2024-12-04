@@ -1,5 +1,6 @@
 ---
 title: 2. PROGRAMACION
+layout: home
 ---
 
 ## Programacion
