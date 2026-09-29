@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Antonio Magdalena · Desarrollador junior",
+  title: "Antonio Magdalena Gonzalez · Desarrollador junior",
   description: "Portfolio de Antonio Magdalena: desarrollo web y DevOps.",
 };
 
