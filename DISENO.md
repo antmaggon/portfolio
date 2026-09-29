@@ -21,8 +21,8 @@ Lo que vaya entre [corchetes] se deja como TODO visible. No inventes contenido.
 <section> con <h2>, contraste suficiente, foco visible.
 
 ## Flujo de trabajo
-- Una rama por paso: base-oscura, cabecera-y-sobre-mi, tarjetas-proyecto,
-  contacto, ajustes-movil.
+- Una rama por paso: base-oscura (hecha), baldas-esqueleto, textos-y-cabecera,
+  tarjetas-proyecto, contacto, ajustes-movil.
 - Commits pequeños con mensaje claro. Nada directo a main.
 - Antes de cada commit: npm run lint y npm run build.
 - No añadir dependencias sin avisar.
