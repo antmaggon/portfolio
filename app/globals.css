@@ -22,3 +22,466 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
+
+/* ── Tambor ─────────────────────────────────────────────────── */
+
+.drum {
+  /* Ancho de la cámara activa y separación con las vecinas. */
+  --card-w: min(760px, 48vw);
+  --card-gap: 2.5rem;
+  --spin-ease: cubic-bezier(0.65, 0, 0.35, 1);
+  /* Radio del tambor: distancia del eje a cada cara para que, con
+     --side-angle entre cámaras, las vecinas queden a --card-gap. */
+  --radius: calc(
+    (var(--card-w) / 2 + var(--card-gap)) / tan(calc(var(--side-angle) / 2))
+  );
+
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Ocupa justo la pantalla: la página no hace scroll, solo se gira. */
+  flex: none;
+  height: 100dvh;
+  padding-block: 2.5rem 1.5rem;
+  overflow: hidden;
+  touch-action: pan-y;
+  outline-offset: -4px;
+  background:
+    radial-gradient(60% 45% at 100% 100%, rgb(16 185 129 / 0.08), transparent 70%),
+    #07080c;
+}
+
+.drum:focus-visible,
+.drum-arrow:focus-visible,
+.drum-tab:focus-visible,
+.drum-slide a:focus-visible {
+  outline: 2px solid var(--accent, #818cf8);
+  outline-offset: 3px;
+}
+
+/* Aro de fondo: solo un guiño al tambor, muy discreto. */
+.drum::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 2.5rem;
+  left: 50%;
+  width: calc(var(--card-w) * 2.6);
+  aspect-ratio: 1;
+  translate: -50% 0;
+  border: 1px solid rgb(255 255 255 / 0.06);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Las tres cámaras se apilan en la misma celda, que ocupa el alto
+   que dejan libre las pestañas. */
+.drum-track {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  perspective: 2000px;
+}
+
+.drum-slide {
+  grid-area: 1 / 1;
+  justify-self: center;
+  align-self: center;
+  display: flex;
+  /* Todas las caras miden lo mismo; si el contenido no cabe, se desplaza
+     dentro de la tarjeta. */
+  width: var(--card-w);
+  height: min(36rem, 100%);
+  transform:
+    translateZ(calc(-1 * var(--radius)))
+    rotateY(calc(var(--offset, 0) * var(--side-angle)))
+    translateZ(var(--radius));
+  /* Arranque y frenada suaves, como un tambor con algo de peso. */
+  transition:
+    transform var(--spin-time) var(--spin-ease),
+    opacity var(--spin-time) var(--spin-ease),
+    filter var(--spin-time) var(--spin-ease);
+  backface-visibility: hidden;
+}
+
+.drum-slide[aria-hidden="true"] {
+  opacity: 0.45;
+  filter: brightness(0.6) saturate(0.7);
+}
+
+/* La cámara que da la vuelta de un lado al otro no cruza por delante
+   de la activa: sigue girando hacia fuera, se desvanece y reaparece por
+   el lado contrario. Hay dos animaciones iguales para que se reinicie
+   cuando la misma cámara da la vuelta dos veces seguidas. */
+.drum-slide--wrap-next,
+.drum-slide--wrap-prev {
+  transition: none;
+  animation: drum-wrap-a var(--spin-time) var(--spin-ease);
+}
+
+.drum-slide--wrap-prev {
+  animation-name: drum-wrap-b;
+}
+
+@keyframes drum-wrap-a {
+  0% {
+    transform:
+      translateZ(calc(-1 * var(--radius)))
+      rotateY(calc(var(--prev-offset) * var(--side-angle)))
+      translateZ(var(--radius));
+  }
+  45% {
+    opacity: 0;
+    transform:
+      translateZ(calc(-1 * var(--radius)))
+      rotateY(calc(var(--exit-offset) * var(--side-angle)))
+      translateZ(var(--radius));
+  }
+  55% {
+    opacity: 0;
+    transform:
+      translateZ(calc(-1 * var(--radius)))
+      rotateY(calc(var(--enter-offset) * var(--side-angle)))
+      translateZ(var(--radius));
+  }
+}
+
+@keyframes drum-wrap-b {
+  0% {
+    transform:
+      translateZ(calc(-1 * var(--radius)))
+      rotateY(calc(var(--prev-offset) * var(--side-angle)))
+      translateZ(var(--radius));
+  }
+  45% {
+    opacity: 0;
+    transform:
+      translateZ(calc(-1 * var(--radius)))
+      rotateY(calc(var(--exit-offset) * var(--side-angle)))
+      translateZ(var(--radius));
+  }
+  55% {
+    opacity: 0;
+    transform:
+      translateZ(calc(-1 * var(--radius)))
+      rotateY(calc(var(--enter-offset) * var(--side-angle)))
+      translateZ(var(--radius));
+  }
+}
+
+.drum-slide:nth-child(1) { --accent: #818cf8; }
+.drum-slide:nth-child(2) { --accent: #34d399; }
+.drum-slide:nth-child(3) { --accent: #fbbf24; }
+
+/* ── Tarjeta de cámara ── */
+
+.drum-slide > section {
+  position: relative;
+  flex: 1;
+  /* Si el contenido no cabe (sobre todo en móvil), se desplaza dentro. */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 0.15) transparent;
+  padding: 2.25rem;
+  border: 1px solid rgb(255 255 255 / 0.08);
+  border-radius: 1.25rem;
+  background: linear-gradient(180deg, #151822, #10121a);
+  box-shadow: 0 30px 80px -20px rgb(0 0 0 / 0.7);
+}
+
+/* Línea de acento en el borde superior. */
+.drum-slide > section::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.drum-slide h2 {
+  margin-bottom: 1.75rem;
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+}
+
+.drum-slide a {
+  color: inherit;
+}
+
+/* ── Presentación ── */
+
+.drum-intro {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "avatar name"
+    "avatar tagline"
+    "social social"
+    "bio bio";
+  column-gap: 1.5rem;
+  align-items: end;
+}
+
+.drum-avatar {
+  grid-area: avatar;
+  display: grid;
+  place-items: center;
+  width: 6.5rem;
+  aspect-ratio: 1;
+  border-radius: 1.4rem;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  box-shadow: 0 12px 40px -8px rgb(139 92 246 / 0.6);
+  color: #fff;
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+
+.drum-name {
+  grid-area: name;
+  font-size: clamp(2rem, 3.6vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.drum-tagline {
+  grid-area: tagline;
+  align-self: start;
+  margin-top: 0.4rem;
+  color: #a5b4fc;
+}
+
+.drum-social {
+  grid-area: social;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.75rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgb(255 255 255 / 0.08);
+}
+
+.drum-social a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0 0.9rem;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.drum-social a:hover {
+  border-color: var(--accent);
+}
+
+.drum-bio {
+  grid-area: bio;
+  margin-top: 1.5rem;
+  color: #b4b8c5;
+  line-height: 1.7;
+}
+
+/* ── Proyectos ── */
+
+.drum-projects {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.drum-project-card {
+  padding: 1.1rem;
+  border: 1px solid rgb(255 255 255 / 0.08);
+  border-radius: 0.9rem;
+  background: rgb(255 255 255 / 0.02);
+}
+
+.drum-project-card > a {
+  display: block;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.drum-project-card > p {
+  margin-top: 0.5rem;
+  color: #9aa0ae;
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+.drum-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.drum-tags li {
+  padding: 0.15rem 0.55rem;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 999px;
+  font-size: 0.65rem;
+}
+
+/* ── Contacto ── */
+
+.drum-contact-body {
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+
+.drum-contact-email {
+  margin-top: 1.5rem;
+  color: #b4b8c5;
+}
+
+/* ── Flechas ── */
+
+.drum-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  aspect-ratio: 1;
+  translate: 0 -50%;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 50%;
+  background: rgb(10 11 16 / 0.85);
+  color: var(--foreground);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.drum-arrow:hover {
+  border-color: rgb(255 255 255 / 0.35);
+  background: #151822;
+}
+
+.drum-arrow--prev { left: 2.5rem; }
+.drum-arrow--next { right: 2.5rem; }
+
+/* ── Pestañas ── */
+
+.drum-tabs {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.drum-tab {
+  padding: 0.35rem 0;
+  border: none;
+  border-bottom: 1px solid transparent;
+  background: none;
+  color: var(--foreground);
+  opacity: 0.5;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+}
+
+.drum-tab:nth-child(1) { --accent: #818cf8; }
+.drum-tab:nth-child(2) { --accent: #34d399; }
+.drum-tab:nth-child(3) { --accent: #fbbf24; }
+
+.drum-tab[aria-current="true"] {
+  opacity: 1;
+  border-bottom-color: var(--accent);
+}
+
+/* ── Móvil: cámara casi a pantalla completa, la siguiente asoma ── */
+
+@media (max-width: 640px) {
+  .drum {
+    --card-w: calc(100vw - 4rem);
+    --card-gap: 1rem;
+    padding-block: 1.5rem;
+  }
+
+  .drum-slide > section {
+    min-height: 0;
+    padding: 1.25rem;
+  }
+
+  .drum-intro {
+    column-gap: 1rem;
+  }
+
+  .drum-avatar {
+    width: 4rem;
+    border-radius: 1rem;
+    font-size: 1.4rem;
+  }
+
+  .drum-projects {
+    grid-template-columns: 1fr;
+  }
+
+  /* Flechas y puntos en una fila bajo la cámara. */
+  .drum-arrow {
+    top: auto;
+    bottom: 1rem;
+    translate: none;
+  }
+
+  .drum-arrow--prev { left: 1.5rem; }
+  .drum-arrow--next { right: 1.5rem; }
+
+  .drum-tabs {
+    gap: 0.4rem;
+    align-items: center;
+    min-height: 2.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .drum-tab {
+    width: 0.4rem;
+    height: 0.4rem;
+    padding: 0;
+    border: none;
+    border-radius: 999px;
+    background: var(--foreground);
+    transition: width 0.2s ease;
+  }
+
+  .drum-tab[aria-current="true"] {
+    width: 1.5rem;
+    background: var(--accent);
+  }
+
+  /* El texto sigue siendo el nombre accesible del botón. */
+  .drum-tab-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drum-slide--wrap-next,
+  .drum-slide--wrap-prev {
+    animation: none;
+  }
+
+  .drum-slide,
+  .drum-arrow,
+  .drum-tab {
+    transition: none;
+  }
+}
