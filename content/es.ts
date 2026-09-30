@@ -29,7 +29,7 @@ export type SiteContent = {
 
 export const es: SiteContent = {
   meta: {
-    title: "Antonio Magdalena Gonzalez · Desarrollador junior",
+    title: "Antonio Magdalena González · Desarrollador junior",
     description: "Portfolio de Antonio Magdalena: desarrollo web y DevOps.",
   },
   hero: {
