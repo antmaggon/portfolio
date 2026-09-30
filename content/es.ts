@@ -70,7 +70,7 @@ export const es: SiteContent = {
   presentation: {
     heading: "PRESENTACIÓN",
     name: "Antonio Magdalena",
-    tagline: "Desarrollando web y DevOps",
+    tagline: "Desarrollo web y DevOps",
     bio: "[TODO]",
     avatarInitials: "AM",
     social: [
