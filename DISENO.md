@@ -4,14 +4,13 @@
 Portfolio personal de Antonio Magdalena, en español (inglés más adelante).
 
 ## Diseño
-Página única con scroll vertical. Un contenedor oscuro que engloba 4 "baldas"
-apiladas: Cabecera, Sobre mí, Proyectos y Contacto. Cada balda es un bloque
-oscuro ligeramente distinto del fondo, con borde fino y un acento de color
-propio. Estilo minimalista.
-
-Proyectos: una tarjeta por proyecto con giro 3D (frente y reverso).
-El giro funciona con hover, con foco de teclado y con toque en móvil, y
-respeta prefers-reduced-motion. Alto fijo por tarjeta; el reverso, corto.
+Página única con tres "cámaras" dispuestas en una rueda tipo tambor de
+revólver: Presentación (nombre, frase, foto, enlaces y descripción),
+Proyectos (moduLife, homelab y este portfolio) y Contacto. La rueda gira
+con flechas laterales, teclado y deslizando. El scroll vertical lee el
+contenido de la cámara activa; la rueda del ratón no gira el tambor.
+Cada cámara tiene su ancla (#proyectos, #contacto). Sin JavaScript, las
+tres se ven apiladas. Con prefers-reduced-motion, sin animación.
 
 ## Contenido
 Los textos van en content/es.ts, tipados, pensados para añadir content/en.ts.
