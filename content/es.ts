@@ -47,6 +47,7 @@ export type SiteContent = {
   };
 };
 
+
 export const es: SiteContent = {
   meta: {
     title: "Antonio Magdalena González · Desarrollador junior",
@@ -70,13 +71,13 @@ export const es: SiteContent = {
   presentation: {
     heading: "PRESENTACIÓN",
     name: "Antonio Magdalena",
-    tagline: "Desarrollo web y DevOps",
-    bio: "[TODO]",
+    tagline: "Desarrollo web e interés en DevOps",
+    bio: "Recién graduado en el grado superior de Desarrollo de Aplicaciones Web. Me interesan el desarrollo, las redes, la infraestructura y la seguridad, y practico con un homelab propio. Ahora mismo estoy buscando trabajo.",
     avatarInitials: "AM",
     social: [
-      { label: "GitHub", url: "[TODO]" },
-      { label: "LinkedIn", url: "[TODO]" },
-      { label: "[TODO]", url: "[TODO]" },
+      { label: "GitHub", url: "https://github.com/antmaggon" },
+      { label: "LinkedIn", url: "https://www.linkedin.com/in/antmaggon" },
+      { label: "Correo", url: "mailto:antmaggon@proton.me" },
     ],
   },
   projects: {
@@ -84,27 +85,30 @@ export const es: SiteContent = {
     items: [
       {
         name: "moduLife",
-        description: "[TODO]",
-        url: "[TODO]",
-        tags: ["[TODO]"],
+        description:
+          "Aplicación local para controlar los aspectos de tu vida que quieras. Cada persona instala o crea los módulos que le interesen, y trae algunos por defecto que se activan o desactivan.",
+        url: "",
+        tags: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Docker"],
       },
       {
         name: "Homelab",
-        description: "[TODO]",
-        url: "[TODO]",
-        tags: ["[TODO]"],
+        description:
+          "Servidor propio donde alojo mis aplicaciones y sigo su rendimiento y consumo, y también servidores de juegos y otras cosas de ocio. Ahora mismo lo estoy reconstruyendo desde cero.",
+        url: "",
+        tags: ["Linux", "Docker", "Tailscale"],
       },
       {
         name: "Este portfolio",
-        description: "[TODO]",
-        url: "[TODO]",
-        tags: ["[TODO]"],
+        description:
+          "Hecho con Next.js y Tailwind y desplegado en Vercel: cada cambio va en su rama, con vista previa, y se publica al fusionarlo.",
+        url: "https://github.com/antmaggon/portfolio",
+        tags: ["Next.js", "TypeScript", "Tailwind", "Vercel"],
       },
     ],
   },
   contact: {
     heading: "CONTACTO",
-    body: "[TODO]",
-    email: "[TODO]",
+    body: "Si buscas un junior en desarrollo o DevOps, escríbeme.",
+    email: "antmaggon@proton.me",
   },
 };
