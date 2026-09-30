@@ -49,7 +49,7 @@ body {
      código, y el ancla de la URL (#proyectos…) lo desplazaba al cargar
      o al cambiar el tamaño de la ventana, cortando la cámara por arriba. */
   overflow: clip;
-  touch-action: pan-y;
+  touch-action: pan-y pinch-zoom;
   outline-offset: -4px;
   background:
     radial-gradient(60% 45% at 100% 100%, rgb(16 185 129 / 0.08), transparent 70%),
@@ -188,6 +188,7 @@ body {
   /* Si el contenido no cabe (sobre todo en móvil), se desplaza dentro. */
   overflow-y: auto;
   overscroll-behavior: contain;
+  touch-action: pan-y pinch-zoom;
   scrollbar-width: thin;
   scrollbar-color: rgb(255 255 255 / 0.15) transparent;
   padding: 2.25rem;
