@@ -7,8 +7,9 @@ Portfolio personal de Antonio Magdalena, en español (inglés más adelante).
 Página única con tres "cámaras" dispuestas en una rueda tipo tambor de
 revólver: Presentación (nombre, frase, foto, enlaces y descripción),
 Proyectos (moduLife, homelab y este portfolio) y Contacto. La rueda gira
-con flechas laterales, teclado y deslizando. El scroll vertical lee el
-contenido de la cámara activa; la rueda del ratón no gira el tambor.
+con flechas laterales, teclado, deslizando y con la rueda del ratón.
+La vista ocupa toda la pantalla y la página no hace scroll; si el
+contenido de una cámara no cabe, se desplaza dentro de su tarjeta.
 Cada cámara tiene su ancla (#proyectos, #contacto). Sin JavaScript, las
 tres se ven apiladas. Con prefers-reduced-motion, sin animación.
 
