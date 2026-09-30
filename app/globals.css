@@ -45,7 +45,10 @@ body {
   flex: none;
   height: 100dvh;
   padding-block: 2.5rem 1.5rem;
-  overflow: hidden;
+  /* clip y no hidden: con hidden, .drum sigue siendo desplazable por
+     código, y el ancla de la URL (#proyectos…) lo desplazaba al cargar
+     o al cambiar el tamaño de la ventana, cortando la cámara por arriba. */
+  overflow: clip;
   touch-action: pan-y;
   outline-offset: -4px;
   background:
