@@ -14,14 +14,14 @@
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);
   --color-border: var(--border);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-space-grotesk);
+  --font-mono: var(--font-plex-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-space-grotesk), Arial, Helvetica, sans-serif;
 }
 
 /* ── Tambor ─────────────────────────────────────────────────── */
@@ -188,7 +188,7 @@ body {
   scrollbar-color: rgb(255 255 255 / 0.15) transparent;
   padding: 2.25rem;
   border: 1px solid rgb(255 255 255 / 0.08);
-  border-radius: 1.25rem;
+  border-radius: 0;
   background: var(--surface);
   box-shadow: 0 30px 80px -20px rgb(0 0 0 / 0.7);
 }
@@ -207,8 +207,9 @@ body {
 .drum-slide h2 {
   margin-bottom: 1.75rem;
   color: var(--accent);
+  font-family: var(--font-mono);
   font-size: 0.7rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.2em;
 }
 
@@ -247,9 +248,9 @@ body {
 .drum-name {
   grid-area: name;
   font-size: clamp(2rem, 3.6vw, 2.75rem);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.05;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
 }
 
 .drum-tagline {
@@ -263,25 +264,37 @@ body {
   grid-area: social;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
+  gap: 0.25rem;
   margin-top: 1.75rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid rgb(255 255 255 / 0.08);
 }
 
+/* El área clicable es mayor que el icono: así el primero queda
+   alineado con el texto de encima. */
+.drum-social li:first-child {
+  margin-left: -0.625rem;
+}
+
+/* Solo icono: el nombre accesible va en aria-label. */
 .drum-social a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.25rem;
-  padding: 0 0.9rem;
-  border: 1px solid rgb(255 255 255 / 0.14);
-  border-radius: 999px;
-  font-size: 0.8rem;
-  text-decoration: none;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  aspect-ratio: 1;
+  color: var(--foreground);
+  opacity: 0.75;
+  transition: color 0.2s ease, opacity 0.2s ease;
 }
 
 .drum-social a:hover {
-  border-color: var(--accent);
+  color: var(--accent);
+  opacity: 1;
+}
+
+.drum-social svg {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .drum-bio {
@@ -302,7 +315,7 @@ body {
 .drum-project-card {
   padding: 1.1rem;
   border: 1px solid rgb(255 255 255 / 0.08);
-  border-radius: 0.9rem;
+  border-radius: 0;
   background: rgb(255 255 255 / 0.02);
 }
 
@@ -330,6 +343,7 @@ body {
   padding: 0.15rem 0.55rem;
   border: 1px solid rgb(255 255 255 / 0.14);
   border-radius: 999px;
+  font-family: var(--font-mono);
   font-size: 0.65rem;
 }
 
@@ -392,6 +406,7 @@ body {
   background: none;
   color: var(--foreground);
   opacity: 0.5;
+  font-family: var(--font-mono);
   font-size: 0.7rem;
   letter-spacing: 0.15em;
   cursor: pointer;
@@ -487,7 +502,8 @@ body {
 
   .drum-slide,
   .drum-arrow,
-  .drum-tab {
+  .drum-tab,
+  .drum-social a {
     transition: none;
   }
 }
