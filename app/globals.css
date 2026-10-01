@@ -2,10 +2,11 @@
 
 :root {
   color-scheme: dark;
-  --background: #0f0f0f;
-  --foreground: #e5e5e5;
-  --surface: #1a1a1a;
-  --border: #2a2a2a;
+  --background: #121110;
+  --surface: #1b1a17;
+  --foreground: #ece7dc;
+  --border: #2c2a25;
+  --accent: #c9a227;
 }
 
 @theme inline {
@@ -13,14 +14,14 @@
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);
   --color-border: var(--border);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-space-grotesk);
+  --font-mono: var(--font-plex-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-space-grotesk), Arial, Helvetica, sans-serif;
 }
 
 /* ── Tambor ─────────────────────────────────────────────────── */
@@ -32,9 +33,7 @@ body {
   --spin-ease: cubic-bezier(0.65, 0, 0.35, 1);
   /* Radio del tambor: distancia del eje a cada cara para que, con
      --side-angle entre cámaras, las vecinas queden a --card-gap. */
-  --radius: calc(
-    (var(--card-w) / 2 + var(--card-gap)) / tan(calc(var(--side-angle) / 2))
-  );
+  --radius: calc((var(--card-w) / 2 + var(--card-gap)) / tan(calc(var(--side-angle) / 2)));
 
   position: relative;
   isolation: isolate;
@@ -51,16 +50,14 @@ body {
   overflow: clip;
   touch-action: pan-y pinch-zoom;
   outline-offset: -4px;
-  background:
-    radial-gradient(60% 45% at 100% 100%, rgb(16 185 129 / 0.08), transparent 70%),
-    #07080c;
+  background: var(--background);
 }
 
 .drum:focus-visible,
 .drum-arrow:focus-visible,
 .drum-tab:focus-visible,
 .drum-slide a:focus-visible {
-  outline: 2px solid var(--accent, #818cf8);
+  outline: 2px solid var(--accent, #c9a227);
   outline-offset: 3px;
 }
 
@@ -100,9 +97,7 @@ body {
   width: var(--card-w);
   height: min(36rem, 100%);
   transform:
-    translateZ(calc(-1 * var(--radius)))
-    rotateY(calc(var(--offset, 0) * var(--side-angle)))
-    translateZ(var(--radius));
+    translateZ(calc(-1 * var(--radius))) rotateY(calc(var(--offset, 0) * var(--side-angle))) translateZ(var(--radius));
   /* Arranque y frenada suaves, como un tambor con algo de peso. */
   transition:
     transform var(--spin-time) var(--spin-ease),
@@ -133,56 +128,56 @@ body {
 @keyframes drum-wrap-a {
   0% {
     transform:
-      translateZ(calc(-1 * var(--radius)))
-      rotateY(calc(var(--prev-offset) * var(--side-angle)))
-      translateZ(var(--radius));
+      translateZ(calc(-1 * var(--radius))) rotateY(calc(var(--prev-offset) * var(--side-angle))) translateZ(var(--radius));
   }
+
   45% {
     opacity: 0;
     transform:
-      translateZ(calc(-1 * var(--radius)))
-      rotateY(calc(var(--exit-offset) * var(--side-angle)))
-      translateZ(var(--radius));
+      translateZ(calc(-1 * var(--radius))) rotateY(calc(var(--exit-offset) * var(--side-angle))) translateZ(var(--radius));
   }
+
   55% {
     opacity: 0;
     transform:
-      translateZ(calc(-1 * var(--radius)))
-      rotateY(calc(var(--enter-offset) * var(--side-angle)))
-      translateZ(var(--radius));
+      translateZ(calc(-1 * var(--radius))) rotateY(calc(var(--enter-offset) * var(--side-angle))) translateZ(var(--radius));
   }
 }
 
 @keyframes drum-wrap-b {
   0% {
     transform:
-      translateZ(calc(-1 * var(--radius)))
-      rotateY(calc(var(--prev-offset) * var(--side-angle)))
-      translateZ(var(--radius));
+      translateZ(calc(-1 * var(--radius))) rotateY(calc(var(--prev-offset) * var(--side-angle))) translateZ(var(--radius));
   }
+
   45% {
     opacity: 0;
     transform:
-      translateZ(calc(-1 * var(--radius)))
-      rotateY(calc(var(--exit-offset) * var(--side-angle)))
-      translateZ(var(--radius));
+      translateZ(calc(-1 * var(--radius))) rotateY(calc(var(--exit-offset) * var(--side-angle))) translateZ(var(--radius));
   }
+
   55% {
     opacity: 0;
     transform:
-      translateZ(calc(-1 * var(--radius)))
-      rotateY(calc(var(--enter-offset) * var(--side-angle)))
-      translateZ(var(--radius));
+      translateZ(calc(-1 * var(--radius))) rotateY(calc(var(--enter-offset) * var(--side-angle))) translateZ(var(--radius));
   }
 }
 
-.drum-slide:nth-child(1) { --accent: #818cf8; }
-.drum-slide:nth-child(2) { --accent: #34d399; }
-.drum-slide:nth-child(3) { --accent: #fbbf24; }
+.drum-slide:nth-child(1) {
+  --accent: #c9a227;
+}
+
+.drum-slide:nth-child(2) {
+  --accent: #c9a227;
+}
+
+.drum-slide:nth-child(3) {
+  --accent: #c9a227;
+}
 
 /* ── Tarjeta de cámara ── */
 
-.drum-slide > section {
+.drum-slide>section {
   position: relative;
   flex: 1;
   /* Si el contenido no cabe (sobre todo en móvil), se desplaza dentro. */
@@ -193,13 +188,13 @@ body {
   scrollbar-color: rgb(255 255 255 / 0.15) transparent;
   padding: 2.25rem;
   border: 1px solid rgb(255 255 255 / 0.08);
-  border-radius: 1.25rem;
-  background: linear-gradient(180deg, #151822, #10121a);
+  border-radius: 0;
+  background: var(--surface);
   box-shadow: 0 30px 80px -20px rgb(0 0 0 / 0.7);
 }
 
 /* Línea de acento en el borde superior. */
-.drum-slide > section::before {
+.drum-slide>section::before {
   content: "";
   position: absolute;
   top: -1px;
@@ -212,8 +207,9 @@ body {
 .drum-slide h2 {
   margin-bottom: 1.75rem;
   color: var(--accent);
+  font-family: var(--font-mono);
   font-size: 0.7rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.2em;
 }
 
@@ -242,9 +238,9 @@ body {
   width: 6.5rem;
   aspect-ratio: 1;
   border-radius: 1.4rem;
-  background: linear-gradient(135deg, #6366f1, #a855f7);
+  background: var(--accent);
   box-shadow: 0 12px 40px -8px rgb(139 92 246 / 0.6);
-  color: #fff;
+  color: var(--background);
   font-size: 2.25rem;
   font-weight: 700;
 }
@@ -252,47 +248,59 @@ body {
 .drum-name {
   grid-area: name;
   font-size: clamp(2rem, 3.6vw, 2.75rem);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.05;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
 }
 
 .drum-tagline {
   grid-area: tagline;
   align-self: start;
   margin-top: 0.4rem;
-  color: #a5b4fc;
+  color: var(--accent);
 }
 
 .drum-social {
   grid-area: social;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
+  gap: 0.25rem;
   margin-top: 1.75rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid rgb(255 255 255 / 0.08);
 }
 
+/* El área clicable es mayor que el icono: así el primero queda
+   alineado con el texto de encima. */
+.drum-social li:first-child {
+  margin-left: -0.625rem;
+}
+
+/* Solo icono: el nombre accesible va en aria-label. */
 .drum-social a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.25rem;
-  padding: 0 0.9rem;
-  border: 1px solid rgb(255 255 255 / 0.14);
-  border-radius: 999px;
-  font-size: 0.8rem;
-  text-decoration: none;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  aspect-ratio: 1;
+  color: var(--foreground);
+  opacity: 0.75;
+  transition: color 0.2s ease, opacity 0.2s ease;
 }
 
 .drum-social a:hover {
-  border-color: var(--accent);
+  color: var(--accent);
+  opacity: 1;
+}
+
+.drum-social svg {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .drum-bio {
   grid-area: bio;
   margin-top: 1.5rem;
-  color: #b4b8c5;
+  color: #b8b2a3;
   line-height: 1.7;
 }
 
@@ -307,17 +315,17 @@ body {
 .drum-project-card {
   padding: 1.1rem;
   border: 1px solid rgb(255 255 255 / 0.08);
-  border-radius: 0.9rem;
+  border-radius: 0;
   background: rgb(255 255 255 / 0.02);
 }
 
-.drum-project-card > a {
+.drum-project-card>a {
   display: block;
   font-size: 1.1rem;
   text-decoration: none;
 }
 
-.drum-project-card > p {
+.drum-project-card>p {
   margin-top: 0.5rem;
   color: #9aa0ae;
   font-size: 0.8rem;
@@ -335,6 +343,7 @@ body {
   padding: 0.15rem 0.55rem;
   border: 1px solid rgb(255 255 255 / 0.14);
   border-radius: 999px;
+  font-family: var(--font-mono);
   font-size: 0.65rem;
 }
 
@@ -347,7 +356,7 @@ body {
 
 .drum-contact-email {
   margin-top: 1.5rem;
-  color: #b4b8c5;
+  color: #b8b2a3;
 }
 
 /* ── Flechas ── */
@@ -371,11 +380,16 @@ body {
 
 .drum-arrow:hover {
   border-color: rgb(255 255 255 / 0.35);
-  background: #151822;
+  background: var(--surface);
 }
 
-.drum-arrow--prev { left: 2.5rem; }
-.drum-arrow--next { right: 2.5rem; }
+.drum-arrow--prev {
+  left: 2.5rem;
+}
+
+.drum-arrow--next {
+  right: 2.5rem;
+}
 
 /* ── Pestañas ── */
 
@@ -392,14 +406,11 @@ body {
   background: none;
   color: var(--foreground);
   opacity: 0.5;
+  font-family: var(--font-mono);
   font-size: 0.7rem;
   letter-spacing: 0.15em;
   cursor: pointer;
 }
-
-.drum-tab:nth-child(1) { --accent: #818cf8; }
-.drum-tab:nth-child(2) { --accent: #34d399; }
-.drum-tab:nth-child(3) { --accent: #fbbf24; }
 
 .drum-tab[aria-current="true"] {
   opacity: 1;
@@ -415,7 +426,7 @@ body {
     padding-block: 1.5rem;
   }
 
-  .drum-slide > section {
+  .drum-slide>section {
     min-height: 0;
     padding: 1.25rem;
   }
@@ -441,8 +452,13 @@ body {
     translate: none;
   }
 
-  .drum-arrow--prev { left: 1.5rem; }
-  .drum-arrow--next { right: 1.5rem; }
+  .drum-arrow--prev {
+    left: 1.5rem;
+  }
+
+  .drum-arrow--next {
+    right: 1.5rem;
+  }
 
   .drum-tabs {
     gap: 0.4rem;
@@ -478,6 +494,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .drum-slide--wrap-next,
   .drum-slide--wrap-prev {
     animation: none;
@@ -485,7 +502,8 @@ body {
 
   .drum-slide,
   .drum-arrow,
-  .drum-tab {
+  .drum-tab,
+  .drum-social a {
     transition: none;
   }
 }
