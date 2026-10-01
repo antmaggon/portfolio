@@ -1,6 +1,7 @@
 import { es } from "@/content/es";
 import Camera from "@/components/Camera";
 import Drum from "@/components/Drum";
+import ProjectCard from "@/components/ProjectCard";
 import SocialIcon from "@/components/SocialIcon";
 import type { DrumSlide } from "@/content/es";
 
@@ -50,16 +51,14 @@ export default function Home() {
         <Camera id={s1.id} label={cameraLabel(s1)}>
           <ul className="drum-projects">
             {projects.items.map((item) => (
-              <li key={item.name} className="drum-project-card">
-                <a href={item.url} target="_blank" rel="noopener noreferrer">
-                  <strong>{item.name}</strong>
-                </a>
-                <p>{item.description}</p>
-                <ul className="drum-tags">
-                  {item.tags.map((tag) => (
-                    <li key={tag}>{tag}</li>
-                  ))}
-                </ul>
+              <li key={item.name}>
+                <ProjectCard
+                  project={item}
+                  openLabel={projects.openLabel}
+                  closeLabel={projects.closeLabel}
+                  repoLabel={projects.repoLabel}
+                  tagsLabel={projects.tagsLabel}
+                />
               </li>
             ))}
           </ul>

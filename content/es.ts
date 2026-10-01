@@ -8,8 +8,13 @@ export type SocialLink = {
 
 export type ProjectItem = {
   name: string;
-  description: string;
-  url: string;
+  // Ruta del logo en public/ (SVG de 512x512).
+  logo: string;
+  // Resumen de pocas palabras para la tarjeta; vacío = no se muestra.
+  summary?: string;
+  details: string;
+  repoUrl?: string;
+  status?: string;
   tags: string[];
 };
 
@@ -41,6 +46,11 @@ export type SiteContent = {
   };
   projects: {
     heading: string;
+    // Se completa con el nombre: "Ver detalles de moduLife".
+    openLabel: string;
+    closeLabel: string;
+    repoLabel: string;
+    tagsLabel: string;
     items: ProjectItem[];
   };
   contact: {
@@ -85,26 +95,35 @@ export const es: SiteContent = {
   },
   projects: {
     heading: "PROYECTOS",
+    openLabel: "Ver detalles de",
+    closeLabel: "Cerrar",
+    repoLabel: "Ver en GitHub",
+    tagsLabel: "Tecnologías",
     items: [
       {
         name: "moduLife",
-        description:
+        logo: "/logos/modulife.svg",
+        summary: "",
+        details:
           "Aplicación local para controlar los aspectos de tu vida que quieras. Cada persona instala o crea los módulos que le interesen, y trae algunos por defecto que se activan o desactivan.",
-        url: "",
         tags: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Docker"],
       },
       {
         name: "Homelab",
-        description:
+        logo: "/logos/homelab.svg",
+        summary: "",
+        details:
           "Servidor propio donde alojo mis aplicaciones y sigo su rendimiento y consumo, y también servidores de juegos y otras cosas de ocio. Ahora mismo lo estoy reconstruyendo desde cero.",
-        url: "",
+        status: "Reconstruyéndose",
         tags: ["Linux", "Docker", "Tailscale"],
       },
       {
         name: "Este portfolio",
-        description:
+        logo: "/logos/portfolio.svg",
+        summary: "",
+        details:
           "Hecho con Next.js y Tailwind y desplegado en Vercel: cada cambio va en su rama, con vista previa, y se publica al fusionarlo.",
-        url: "https://github.com/antmaggon/portfolio",
+        repoUrl: "https://github.com/antmaggon/portfolio",
         tags: ["Next.js", "TypeScript", "Tailwind", "Vercel"],
       },
     ],
