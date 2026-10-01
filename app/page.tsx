@@ -30,7 +30,7 @@ export default function Home() {
             <ul className="drum-social">
               {presentation.social.map((link, i) => (
                 <li key={i}>
-                  <a href={link.url}>{link.label}</a>
+                  <a href={link.url} target="_blank" rel="noopener noreferrer">{link.label}</a>
                 </li>
               ))}
             </ul>
@@ -42,7 +42,7 @@ export default function Home() {
           <ul className="drum-projects">
             {projects.items.map((item) => (
               <li key={item.name} className="drum-project-card">
-                <a href={item.url}>
+                <a href={item.url} target="_blank" rel="noopener noreferrer">
                   <strong>{item.name}</strong>
                 </a>
                 <p>{item.description}</p>
