@@ -1,6 +1,9 @@
+export type SocialIconName = "github" | "linkedin" | "email";
+
 export type SocialLink = {
   label: string;
   url: string;
+  icon: SocialIconName;
 };
 
 export type ProjectItem = {
@@ -75,9 +78,9 @@ export const es: SiteContent = {
     bio: "Recién graduado en el grado superior de Desarrollo de Aplicaciones Web. Me interesan el desarrollo, las redes, la infraestructura y la seguridad, y practico con un homelab propio. Ahora mismo estoy buscando trabajo.",
     avatarInitials: "AM",
     social: [
-      { label: "GitHub", url: "https://github.com/antmaggon" },
-      { label: "LinkedIn", url: "https://www.linkedin.com/in/antmaggon" },
-      { label: "Correo", url: "mailto:antmaggon@proton.me" },
+      { label: "GitHub", url: "https://github.com/antmaggon", icon: "github" },
+      { label: "LinkedIn", url: "https://www.linkedin.com/in/antmaggon", icon: "linkedin" },
+      { label: "Correo", url: "mailto:antmaggon@proton.me", icon: "email" },
     ],
   },
   projects: {

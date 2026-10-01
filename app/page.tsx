@@ -1,6 +1,7 @@
 import { es } from "@/content/es";
 import Camera from "@/components/Camera";
 import Drum from "@/components/Drum";
+import SocialIcon from "@/components/SocialIcon";
 import type { DrumSlide } from "@/content/es";
 
 function cameraLabel(slide: DrumSlide) {
@@ -30,7 +31,15 @@ export default function Home() {
             <ul className="drum-social">
               {presentation.social.map((link, i) => (
                 <li key={i}>
-                  <a href={link.url} target="_blank" rel="noopener noreferrer">{link.label}</a>
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.label}
+                    title={link.label}
+                  >
+                    <SocialIcon name={link.icon} />
+                  </a>
                 </li>
               ))}
             </ul>
