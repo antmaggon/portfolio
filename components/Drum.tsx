@@ -98,6 +98,9 @@ export default function Drum({
     prevIndex: 0,
   });
   const pointerStartX = useRef<number | null>(null);
+  // Tras un arrastre con ratón que gira, el navegador dispara un click al
+  // soltar; si cae en una tarjeta de proyecto, no debe abrir su panel.
+  const justSwiped = useRef(false);
   // Mientras gira no empieza otro giro: si a mitad de camino las cámaras
   // cambiaran de destino, se superpondrían. El último giro pedido espera
   // en cola y se hace al terminar el actual.
@@ -168,6 +171,8 @@ export default function Drum({
 
     const onWheel = (e: WheelEvent) => {
       if (e.ctrlKey) return; // zoom con Ctrl + rueda
+      // Lo que pasa dentro de un panel (<dialog>) no gira la rueda.
+      if ((e.target as Element).closest("dialog")) return;
       const vertical = Math.abs(e.deltaY) >= Math.abs(e.deltaX);
       const delta = vertical ? e.deltaY : e.deltaX;
       // Si la tarjeta activa tiene más contenido del que cabe, la rueda
@@ -192,6 +197,7 @@ export default function Drum({
   }, []);
 
   const onKeyDown = (e: React.KeyboardEvent) => {
+    if ((e.target as Element).closest("dialog")) return;
     if (e.key === "ArrowLeft") {
       e.preventDefault();
       navigate(activeIndex - 1);
@@ -202,21 +208,32 @@ export default function Drum({
   };
 
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    // Un clic que empieza en un botón o enlace es suyo, no un arrastre.
-    if ((e.target as HTMLElement).closest("button, a")) return;
+    justSwiped.current = false;
+    // Un clic que empieza en un control (flechas, pestañas, enlaces) o en
+    // un panel es suyo, no un arrastre. Las tarjetas de proyecto sí giran.
+    if ((e.target as Element).closest(".drum-arrow, .drum-tab, a, dialog")) return;
     pointerStartX.current = e.clientX;
-    if (e.pointerType === "touch" || e.pointerType === "pen") {
-      e.currentTarget.setPointerCapture(e.pointerId);
-    }
+    // Sin setPointerCapture: con el dedo el navegador ya captura el puntero
+    // en el elemento tocado y pointerup sube hasta aquí; capturarlo en el
+    // tambor desviaba el clic de las tarjetas.
   };
 
   const onPointerUp = (e: React.PointerEvent) => {
+    if ((e.target as Element).closest("dialog")) return;
     if (pointerStartX.current === null) return;
     const delta = pointerStartX.current - e.clientX;
     if (Math.abs(delta) > DRAG_THRESHOLD) {
+      justSwiped.current = true;
       navigate(activeIndex + (delta > 0 ? 1 : -1));
     }
     pointerStartX.current = null;
+  };
+
+  const onClickCapture = (e: React.MouseEvent) => {
+    if (!justSwiped.current) return;
+    justSwiped.current = false;
+    e.preventDefault();
+    e.stopPropagation();
   };
 
   const onPointerCancel = () => {
@@ -242,6 +259,7 @@ export default function Drum({
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
         onPointerCancel={onPointerCancel}
+        onClickCapture={onClickCapture}
         style={
           {
             "--index": activeIndex,
