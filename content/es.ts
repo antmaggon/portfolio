@@ -106,6 +106,7 @@ export const es: SiteContent = {
         summary: "",
         details:
           "Aplicación local para controlar los aspectos de tu vida que quieras. Cada persona instala o crea los módulos que le interesen, y trae algunos por defecto que se activan o desactivan.",
+        repoUrl: "https://github.com/antmaggon/moduLife",
         tags: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Docker"],
       },
       {
