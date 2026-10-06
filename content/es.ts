@@ -25,9 +25,23 @@ export type DrumSlide = {
 };
 
 export type SiteContent = {
+  // Idioma (atributo lang) y ruta de esta versión de la web.
+  lang: "es" | "en";
+  path: "/" | "/en";
   meta: {
     title: string;
     description: string;
+    // Formato de Open Graph: es_ES, en_US…
+    ogLocale: string;
+    // Texto alternativo de la imagen de compartir (public/og.jpg).
+    ogImageAlt: string;
+  };
+  // Interruptor de idioma: code es lo visible ("ES") y name, el nombre
+  // del idioma en su propio idioma, el nombre accesible.
+  languageSwitch: {
+    ariaLabel: string;
+    code: string;
+    name: string;
   };
   drum: {
     ariaLabel: string;
@@ -62,9 +76,18 @@ export type SiteContent = {
 
 
 export const es: SiteContent = {
+  lang: "es",
+  path: "/",
   meta: {
     title: "Antonio Magdalena González · Desarrollador junior",
     description: "Portfolio de Antonio Magdalena: desarrollo web y DevOps.",
+    ogLocale: "es_ES",
+    ogImageAlt: "Ventana de código con el símbolo </> y el nombre antmaggon",
+  },
+  languageSwitch: {
+    ariaLabel: "Idioma",
+    code: "ES",
+    name: "Español",
   },
   drum: {
     ariaLabel: "Rueda de secciones",

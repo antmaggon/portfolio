@@ -1,20 +1,41 @@
-import { es } from "@/content/es";
 import Camera from "@/components/Camera";
 import Drum from "@/components/Drum";
+import LanguageSwitch from "@/components/LanguageSwitch";
 import ProjectCard from "@/components/ProjectCard";
 import SocialIcon from "@/components/SocialIcon";
-import type { DrumSlide } from "@/content/es";
+import type { DrumSlide, SiteContent } from "@/content/es";
+import { es } from "@/content/es";
+import { en } from "@/content/en";
+
+const versions = [es, en];
+
+function switchVersion(content: SiteContent) {
+  return {
+    lang: content.lang,
+    path: content.path,
+    code: content.languageSwitch.code,
+    name: content.languageSwitch.name,
+    slideIds: content.drum.slides.map((s) => s.id),
+  };
+}
 
 function cameraLabel(slide: DrumSlide) {
   return `${slide.number} · ${slide.label}`;
 }
 
-export default function Home() {
-  const { drum, presentation, projects, contact } = es;
+// La página de cada idioma es la misma; solo cambia el contenido.
+export default function HomePage({ content }: { content: SiteContent }) {
+  const { drum, presentation, projects, contact } = content;
   const [s0, s1, s2] = drum.slides;
 
   return (
     <main className="flex-1 flex flex-col">
+      {/* Fuera de <Drum>: sus eventos no llegan a los gestos ni al teclado. */}
+      <LanguageSwitch
+        ariaLabel={content.languageSwitch.ariaLabel}
+        current={switchVersion(content)}
+        versions={versions.map(switchVersion)}
+      />
       <Drum
         tabs={drum.slides}
         ariaLabel={drum.ariaLabel}

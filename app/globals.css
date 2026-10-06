@@ -572,13 +572,64 @@ a.project-dialog-repo:hover {
   border-bottom-color: var(--accent);
 }
 
+/* ── Interruptor de idioma ── */
+
+.lang-switch {
+  position: fixed;
+  top: 0.25rem;
+  right: 0.5rem;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.lang-switch-item {
+  display: flex;
+  align-items: center;
+}
+
+.lang-switch-sep {
+  color: var(--foreground);
+  opacity: 0.3;
+}
+
+/* Zona táctil de 44 px aunque el texto sea pequeño. */
+.lang-switch a {
+  display: grid;
+  place-items: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  color: var(--foreground);
+  opacity: 0.6;
+  text-decoration: none;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.lang-switch a:hover {
+  opacity: 1;
+}
+
+.lang-switch a[aria-current="true"] {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.lang-switch a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
 /* ── Móvil: cámara casi a pantalla completa, la siguiente asoma ── */
 
 @media (max-width: 640px) {
   .drum {
     --card-w: calc(100vw - 4rem);
     --card-gap: 1rem;
-    padding-block: 1.5rem;
+    /* Arriba, hueco para el interruptor de idioma. */
+    padding-block: 3.25rem 1.5rem;
   }
 
   .drum-slide>section {
@@ -683,7 +734,8 @@ a.project-dialog-repo:hover {
   .drum-arrow,
   .drum-tab,
   .drum-social a,
-  .drum-project-card {
+  .drum-project-card,
+  .lang-switch a {
     transition: none;
   }
 }
